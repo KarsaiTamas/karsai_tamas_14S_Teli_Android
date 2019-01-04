@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main2Activity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Edit_Text_Felhasznalo"
+    android:hint="Felhasznalo Nev"
+    android:textAlignment="center"/>
+
+    <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Edit_Text_Jelszo"
+    android:hint="Jelszo"
+        android:password="true"
+    android:textAlignment="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_Bejelentkezes"
+        android:text="Belepes"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_Registracio"
+        android:text="Registralas"/>
+
+</LinearLayout>

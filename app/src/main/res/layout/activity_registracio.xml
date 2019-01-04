@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registracio"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Text_Adat_Felhasznalo"
+        android:hint="Felhasznalo Nev"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Text_Adat_Jelszo"
+        android:hint="Jelszo"
+        android:password="true"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Text_Adat_Jelszo_Ismetles"
+        android:hint="Jelszo ismet"
+        android:password="true"
+        android:textAlignment="center"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Text_Adat_Teljes_Nev"
+
+        android:hint="Teljes nev"
+        android:textAlignment="center"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Text_Adat_Telefon"
+        android:hint="Telefon_Szam"
+        android:textAlignment="center"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_Adatfelvetel"
+        android:text="Registralas"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
