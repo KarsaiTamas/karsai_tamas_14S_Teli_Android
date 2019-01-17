@@ -30,18 +30,21 @@ public class Main2Activity extends AppCompatActivity {
         Button_Bejelentkezes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Edit_Text_Felhasznalo!=null || Edit_Text_Jelszo!=null)
-                {
+
+
+
+
                     if(db.Beengedes(Edit_Text_Felhasznalo.getText().toString(),Edit_Text_Jelszo.getText().toString())==1)
                     {
-                    Intent oda = new Intent(Main2Activity.this,Registracio.class);
+                    Intent oda = new Intent(Main2Activity.this,MainActivity.class);
                     startActivity(oda);
                     finish();
                     }
-                }else
+                else
                     {
-                        Toast.makeText(Main2Activity.this, "Hibás jelszó/felhasználónév", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Main2Activity.this, "Hibás jelszó/felhasználónév"+db.Beengedes(Edit_Text_Felhasznalo.getText().toString(),Edit_Text_Jelszo.getText().toString()), Toast.LENGTH_SHORT).show();
                     }
+
             }
         });
 

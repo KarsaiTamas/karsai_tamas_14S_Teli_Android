@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent uj_adat = new Intent(MainActivity.this,MainActivity.class);
+                Intent uj_adat = new Intent(MainActivity.this,Main2Activity.class);
                 startActivity(uj_adat);
                 finish();
             }
@@ -47,23 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void adatLekeres()
     {
-        Cursor eredmeny = db.Bejelentkez_Nev();
+
         //stringbuffer = hosszú string amihez hozzá fűzzük (appendeljük) a változókat
-        StringBuffer stringBuffer = new StringBuffer();
 
-        if (eredmeny!=null)
-        {
-            if(eredmeny.getCount()>0)
-            {
 
-                stringBuffer.append("Üdvözöllek:" + eredmeny.getString(1) + "\n");
 
-                Text_View_eredmeny.setText(stringBuffer.toString());
+
+                Text_View_eredmeny.setText("Üdvözöllek: "+AdatbazisSegito.be_nev);
+           // Text_View_eredmeny.setText("sanyi");
                 Toast.makeText(this, " Sikeresen beléptél", Toast.LENGTH_SHORT).show();
-            }
-        }else
-        {
-            Toast.makeText(this, "Sikertelen bejelentkezés", Toast.LENGTH_SHORT).show();
-        }
+
+
     }
 }

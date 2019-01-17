@@ -23,21 +23,32 @@ public class Registracio extends AppCompatActivity {
         Button_Adatfelvetel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Edit_Text_Adat_Felhasznalo!=null)
+                if(!Edit_Text_Adat_Felhasznalo.getText().toString().equals("") ||
+                   !Edit_Text_Adat_Jelszo.getText().toString().equals("") ||
+                   !Edit_Text_Adat_Jelszo_Ismetles.getText().toString().equals("") ||
+                   !Edit_Text_Adat_Teljes_Nev.getText().toString().equals("") ||
+                   !Edit_Text_Adat_Telefon.getText().toString().equals("")
+                        )
                 {
-                    if(db.Beengedes(Edit_Text_Adat_Felhasznalo.getText().toString())==0 && Edit_Text_Adat_Jelszo.getText().toString().equals(Edit_Text_Adat_Jelszo_Ismetles.getText().toString()))
-                    {
+                    int myNum = 0;
+
+                    try {
+                        myNum = Integer.parseInt(Edit_Text_Adat_Telefon.getText().toString());
+
+                    if (db.Beengedes(Edit_Text_Adat_Felhasznalo.getText().toString()) == 0 && Edit_Text_Adat_Jelszo.getText().toString().equals(Edit_Text_Adat_Jelszo_Ismetles.getText().toString())) {
                         adatRogzites();
-                        Intent vissza = new Intent(Registracio.this,Main2Activity.class);
+                        Intent vissza = new Intent(Registracio.this, Main2Activity.class);
                         startActivity(vissza);
                         finish();
-                    }else
-                        {
-                            Toast.makeText(Registracio.this, "Hibás adatot adott meg.", Toast.LENGTH_SHORT).show();
-                        }
+                    } else {
+                        Toast.makeText(Registracio.this, "Hibás adatot adott meg.", Toast.LENGTH_SHORT).show();
+                    }
+                    } catch(NumberFormatException nfe) {
+                        Toast.makeText(Registracio.this, "Hibás adatot adott meg.", Toast.LENGTH_SHORT).show();
+                    }
                 }else
                     {
-                        Toast.makeText(Registracio.this, "Nem adott meg adatot/Hibás adatot adott meg.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registracio.this, "Nem adott meg egy értéket!", Toast.LENGTH_SHORT).show();
                     }
             }
         });
@@ -45,10 +56,10 @@ public class Registracio extends AppCompatActivity {
 
     public void init()
     {
-        Edit_Text_Adat_Felhasznalo = (EditText) findViewById(R.id.Edit_Text_Felhasznalo);
+        Edit_Text_Adat_Felhasznalo = (EditText) findViewById(R.id.Edit_Text_Adat_Felhasznalo);
         Edit_Text_Adat_Teljes_Nev = (EditText) findViewById(R.id.Edit_Text_Adat_Teljes_Nev);
         Edit_Text_Adat_Telefon = (EditText) findViewById(R.id.Edit_Text_Adat_Telefon);
-        Edit_Text_Adat_Jelszo = (EditText) findViewById(R.id.Edit_Text_Jelszo);
+        Edit_Text_Adat_Jelszo = (EditText) findViewById(R.id.Edit_Text_Adat_Jelszo);
         Edit_Text_Adat_Jelszo_Ismetles = (EditText) findViewById(R.id.Edit_Text_Adat_Jelszo_Ismetles);
         Button_Adatfelvetel = (Button) findViewById(R.id.Button_Adatfelvetel);
         db = new AdatbazisSegito(this);
@@ -60,7 +71,7 @@ public class Registracio extends AppCompatActivity {
         String jelszo = Edit_Text_Adat_Jelszo.getText().toString();
         String teljes_nev= Edit_Text_Adat_Teljes_Nev.getText().toString();
         Integer telefon=Integer.parseInt(Edit_Text_Adat_Telefon.getText().toString());
-
+        db.adatRogzites(felhasznalo,jelszo,teljes_nev,telefon);
         boolean eredmeny = db.adatRogzites(felhasznalo,jelszo,teljes_nev,telefon);
 
         if (eredmeny)

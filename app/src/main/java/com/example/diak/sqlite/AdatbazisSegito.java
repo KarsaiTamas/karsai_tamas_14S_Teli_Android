@@ -20,7 +20,7 @@ public class AdatbazisSegito extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Tanulo.db";    //adatbázis file név
     public static final String TABLE_NAME = "Tanulo_tabla";    //tábla neve
-
+    private static final int DATABASE_VERSION = 2;
     public static final String COL_1 = "ID";            //első oszlop neve
     public static final String COL_2 = "FELHASZNALO";    //második oszlop neve
     public static final String COL_3 = "JELSZO";   //harmadik oszlop neve
@@ -32,7 +32,7 @@ public class AdatbazisSegito extends SQLiteOpenHelper {
 
     public AdatbazisSegito(Context context)
     {
-        super(context,DATABASE_NAME,null,1);
+        super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
     //LÉTREHOZZUK A TÁBLÁT ÉS A BENNE LÉVŐ OSZLOPOKHOZ TÍPUST ADUNK
@@ -49,6 +49,7 @@ public class AdatbazisSegito extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(sqLiteDatabase);
     }
 
     //adat felvétel
@@ -81,28 +82,32 @@ public class AdatbazisSegito extends SQLiteOpenHelper {
 
     public int Beengedes(String nev,String jelszoa)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("Select * from " + TABLE_NAME+"where felhasznalo='"+nev+"'and jelszo='"+jelszoa+"'",null);
-        int szamolas=eredmeny.getCount();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor eredmeny = db.rawQuery("Select * from " + TABLE_NAME+" where FELHASZNALO='"+nev+"'and JELSZO='"+jelszoa+"'",null);
+        int szamolas=eredmeny.getCount()-1;
+
         eredmeny.close();
         be_nev=nev;
         be_jelszo=jelszoa;
+        db.close();
         return szamolas;
     }    public int Beengedes(String nev)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("Select * from " + TABLE_NAME+"where felhasznalo='"+nev+"'",null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor eredmeny = db.rawQuery("Select * from " + TABLE_NAME+" where felhasznalo='"+nev+"'",null);
         int szamolas=eredmeny.getCount();
         eredmeny.close();
+        db.close();
         be_nev=nev;
         return szamolas;
     }
-    private String be_nev,be_jelszo;
+    public static String be_nev,be_jelszo;
     public Cursor Bejelentkez_Nev()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor eredmeny = db.rawQuery("Select * from " + TABLE_NAME+"where felhasznalo='"+be_nev+"' and jelszo='"+be_jelszo+"'",null);
-
+        Cursor eredmeny = db.rawQuery("Select * from " + TABLE_NAME+" where felhasznalo='"+be_nev+"' and jelszo='"+be_jelszo+"'",null);
+        eredmeny.moveToFirst();
         return eredmeny;
     }
 }
